@@ -7,6 +7,7 @@ import ProductCard from '../components/ProductCard.jsx'
 import { getProduct, products } from '../data/products.js'
 import { useCart, formatPrice } from '../context/CartContext.jsx'
 import { cdn } from '../lib/img.js'
+import SmartImage from '../components/SmartImage.jsx'
 
 export default function Product({ onCartOpen }) {
   const { id } = useParams()
@@ -69,10 +70,11 @@ export default function Product({ onCartOpen }) {
                   i === 0 ? 'sm:col-span-2' : ''
                 }`}
               >
-                <img
-                  src={cdn(src, i === 0 ? 1000 : 600)}
+                <SmartImage
+                  src={cdn(src, i === 0 ? 900 : 500)}
+                  fallback={src}
                   alt={`${product.name} — view ${i + 1}`}
-                  loading={i === 0 ? 'eager' : 'lazy'}
+                  eager={i === 0}
                   className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                 />
               </motion.div>

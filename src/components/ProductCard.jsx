@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { staggerItem } from './Reveal.jsx'
 import { useCart, formatPrice } from '../context/CartContext.jsx'
 import { cdn } from '../lib/img.js'
+import SmartImage from './SmartImage.jsx'
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
@@ -16,10 +17,10 @@ export default function ProductCard({ product }) {
     <motion.div variants={staggerItem}>
       <Link to={`/product/${product.id}`} className="group block">
         <div className="card-shine relative aspect-[4/5] overflow-hidden rounded-4xl bg-blush-50">
-          <img
-            src={cdn(product.image, 600)}
+          <SmartImage
+            src={cdn(product.image, 500)}
+            fallback={product.image}
             alt={product.name}
-            loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
 
