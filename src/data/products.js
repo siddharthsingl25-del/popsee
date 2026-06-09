@@ -5,6 +5,29 @@ const img = (id, w = 900) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`
 
 export const products = [
+  // ───────────────────────── FEATURED ─────────────────────────
+  {
+    id: 'xyz-test',
+    name: 'xyz test',
+    category: 'women',
+    type: 'Dresses',
+    price: 72,
+    rating: 4.9,
+    reviews: 64,
+    badge: 'New',
+    colors: ['#FFBBE7', '#BDE0FE', '#FFFCF9'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    image: 'https://i.ibb.co/B5psBVCn/1-jpg-1.jpg',
+    gallery: [
+      'https://i.ibb.co/B5psBVCn/1-jpg-1.jpg',
+      'https://i.ibb.co/ynRRKmsq/2-jpg.jpg',
+      'https://i.ibb.co/ZzynPzyr/3-jpg-2.jpg',
+      'https://i.ibb.co/RTc7Hmvh/4-jpg-1.jpg',
+      'https://i.ibb.co/bYHcydL/5-jpg.jpg',
+    ],
+    description:
+      'A soft, considered everyday piece in calm popsee tones. Beautifully made from naturally soft fabric for an easy, all-day feel.',
+  },
   // ───────────────────────── WOMEN ─────────────────────────
   {
     id: 'w-linen-shirt',
