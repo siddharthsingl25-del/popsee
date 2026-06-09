@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { staggerItem } from './Reveal.jsx'
 import { useCart, formatPrice } from '../context/CartContext.jsx'
+import { cdn } from '../lib/img.js'
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
@@ -16,7 +17,7 @@ export default function ProductCard({ product }) {
       <Link to={`/product/${product.id}`} className="group block">
         <div className="card-shine relative aspect-[4/5] overflow-hidden rounded-4xl bg-blush-50">
           <img
-            src={product.image}
+            src={cdn(product.image, 600)}
             alt={product.name}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

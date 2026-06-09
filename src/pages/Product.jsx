@@ -6,13 +6,13 @@ import Reveal, { stagger } from '../components/Reveal.jsx'
 import ProductCard from '../components/ProductCard.jsx'
 import { getProduct, products } from '../data/products.js'
 import { useCart, formatPrice } from '../context/CartContext.jsx'
+import { cdn } from '../lib/img.js'
 
 export default function Product({ onCartOpen }) {
   const { id } = useParams()
   const product = getProduct(id)
   const { addItem } = useCart()
 
-  const [active, setActive] = useState(0)
   const [size, setSize] = useState(product?.sizes[0] || '')
   const [added, setAdded] = useState(false)
 
@@ -57,39 +57,30 @@ export default function Product({ onCartOpen }) {
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-2">
-          {/* Gallery */}
-          <div className="flex flex-col-reverse gap-4 sm:flex-row">
-            <div className="flex gap-3 sm:flex-col">
-              {gallery.map((src, i) => (
-                <button
-                  key={src + i}
-                  onClick={() => setActive(i)}
-                  className={`h-20 w-16 overflow-hidden rounded-2xl ring-2 transition sm:h-24 sm:w-20 ${
-                    active === i ? 'ring-blush-400' : 'ring-transparent hover:ring-ink/20'
-                  }`}
-                >
-                  <img src={src} alt="" className="h-full w-full object-cover" />
-                </button>
-              ))}
-            </div>
-            <div className="card-shine relative flex-1 overflow-hidden rounded-4xl bg-blush-50">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={active}
-                  src={gallery[active]}
-                  alt={product.name}
-                  initial={{ opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="aspect-[4/5] h-full w-full object-cover"
+          {/* Gallery — every photo on show */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {gallery.map((src, i) => (
+              <motion.div
+                key={src + i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                className={`card-shine overflow-hidden rounded-4xl bg-blush-50 ${
+                  i === 0 ? 'sm:col-span-2' : ''
+                }`}
+              >
+                <img
+                  src={cdn(src, i === 0 ? 1000 : 600)}
+                  alt={`${product.name} — view ${i + 1}`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                 />
-              </AnimatePresence>
-            </div>
+              </motion.div>
+            ))}
           </div>
 
           {/* Info */}
-          <div className="lg:py-4">
+          <div className="lg:sticky lg:top-24 lg:self-start lg:py-4">
             <Reveal>
               {product.badge && (
                 <span className="chip bg-blush-200 text-ink">{product.badge}</span>

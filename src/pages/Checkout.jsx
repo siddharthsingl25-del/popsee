@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Page from '../components/Page.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { useCart, formatPrice } from '../context/CartContext.jsx'
+import { cdn } from '../lib/img.js'
 
 export default function Checkout() {
   const { items, subtotal, shipping, total, clear } = useCart()
@@ -131,7 +132,7 @@ export default function Checkout() {
                 {items.map((i) => (
                   <div key={i.key} className="flex gap-3">
                     <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-blush-50">
-                      <img src={i.image} alt={i.name} className="h-full w-full object-cover" />
+                      <img src={cdn(i.image, 160)} alt={i.name} loading="lazy" className="h-full w-full object-cover" />
                       <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-[20px] place-items-center rounded-full bg-ink px-1 text-[11px] font-bold text-cream">
                         {i.qty}
                       </span>

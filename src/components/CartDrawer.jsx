@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart, formatPrice } from '../context/CartContext.jsx'
+import { cdn } from '../lib/img.js'
 
 export default function CartDrawer({ open, onClose }) {
   const { items, subtotal, shipping, total, setQty, removeItem } = useCart()
@@ -63,8 +64,9 @@ export default function CartDrawer({ open, onClose }) {
                       >
                         <div className="h-24 w-20 shrink-0 overflow-hidden rounded-2xl bg-blush-50">
                           <img
-                            src={item.image}
+                            src={cdn(item.image, 200)}
                             alt={item.name}
+                            loading="lazy"
                             className="h-full w-full object-cover"
                           />
                         </div>
